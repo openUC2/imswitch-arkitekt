@@ -1,0 +1,54 @@
+name: imswitch-arkitekt
+display_name: ImSwitch Arkitekt
+# use 'hidden' to remove plugin from imswitch hub search results
+visibility: public
+# see https://imswitch.org/stable/plugins/manifest.html for valid categories
+categories: ["Annotation", "Segmentation", "Acquisition"]
+contributions:
+  commands:
+    - id: imswitch-arkitekt.get_controller
+      python_name: imswitch_arkitekt._controller:imswitch_get_controller
+      title: Open data with ImSwitch Arkitekt
+    - id: imswitch-arkitekt.write_multiple
+      python_name: imswitch_arkitekt._manager:write_multiple
+      title: Save multi-layer data with ImSwitch Arkitekt
+    - id: imswitch-arkitekt.make_sample_data
+      python_name: imswitch_arkitekt._sample_data:make_sample_data
+      title: Load sample data from ImSwitch Arkitekt
+    - id: imswitch-arkitekt.make_container_widget
+      python_name: imswitch_arkitekt:ImageThreshold
+      title: Make threshold Container widget
+    - id: imswitch-arkitekt.make_magic_widget
+      python_name: imswitch_arkitekt:threshold_magic_widget
+      title: Make threshold magic widget
+    - id: imswitch-arkitekt.make_function_widget
+      python_name: imswitch_arkitekt:threshold_autogenerate_widget
+      title: Make threshold function widget
+    - id: imswitch-arkitekt.make_qwidget
+      python_name: imswitch_arkitekt:ExampleQWidget
+      title: Make example QWidget
+  controllers:
+    - command: imswitch-arkitekt.get_controller
+      accepts_directories: false
+      filename_patterns: ['*.npy']
+  info:
+    - command: imswitch-arkitekt.get_info
+      accepts_directories: false
+      filename_patterns: ['*.npy']
+  managers:
+    - command: imswitch-arkitekt.write_multiple
+      layer_types: ['image*','labels*']
+      filename_extensions: []
+    - command: imswitch-arkitekt.write_single_image
+      layer_types: ['image']
+      key: unique_id.1
+  widgets:
+    - command: imswitch-arkitekt.make_container_widget
+      display_name: Container Threshold
+    - command: imswitch-arkitekt.make_magic_widget
+      display_name: Magic Threshold
+    - command: imswitch-arkitekt.make_function_widget
+      autogenerate: true
+      display_name: Autogenerate Threshold
+    - command: imswitch-arkitekt.make_qwidget
+      display_name: Example QWidget
