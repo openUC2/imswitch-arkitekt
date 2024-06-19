@@ -11,22 +11,11 @@ class imswitch_arkitekt_manager(SignalInterface):
         super().__init__(*args, **kwargs)
         self.__logger = initLogger(self)
 
+        self.global_app = None
+        
         if pluginInfo is None:
             # import imswitch_sim_info.py
             return
 
-        self.__pluginInfo = pluginInfo
-        self.__wavelength = self.__pluginInfo.wavelength
-        self.__pixelsize = self.__pluginInfo.pixelSize
-        self.__angleMount = self.__pluginInfo.angleMount
-        self.__simSize = (self.__pluginInfo.width, self.__pluginInfo.height)
-        self.__patternsDir = self.__pluginInfo.patternsDir
-        self.isSimulation = self.__pluginInfo.isSimulation
-        self.nRotations = self.__pluginInfo.nRotations
-        self.nPhases = self.__pluginInfo.nPhases
-        self.simMagnefication = self.__pluginInfo.nPhases
-        self.isFastAPISIM = self.__pluginInfo.isFastAPISIM
-        self.simPixelsize = self.__pluginInfo.simPixelsize
-        self.simNA = self.__pluginInfo.simNA
-        self.simN = self.__pluginInfo.simN # refr
-        self.simETA = self.__pluginInfo.simETA
+    def set_global_app(self, app):
+        self.global_app = app
